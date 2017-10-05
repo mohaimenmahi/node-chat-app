@@ -19,9 +19,10 @@ io.on('connection', (socket) => {
 
   socket.broadcast.emit('newMessege', generateMessege('Admin', 'New user connected'));
 
-  socket.on('createMessege', (messege) => {
+  socket.on('createMessege', (messege, callback) => { // callback is for acknowledgement
     console.log('createMessege', messege);
     io.emit('newMessege', generateMessege(messege.from, messege.text));
+    callback('=> This is from the server.');
     // socket.broadcast.emit('newMessege', {
     //   from: messege.from,
     //   text: messege.text,
